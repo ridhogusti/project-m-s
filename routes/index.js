@@ -1,9 +1,19 @@
 var express = require('express');
-var router = express.Router();
+var app = express();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+app.get('/', authenticationMiddleware(), function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-module.exports = router;
+function authenticationMiddleware() {
+	return (req, res, next) => {
+		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+		if (req.isAuthenticated()) {
+			return next();
+		}
+		res.redirect('/users/login');
+	}
+}
+
+module.exports = app;
