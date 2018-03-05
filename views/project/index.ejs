@@ -198,22 +198,18 @@
                 <% if(data.length > 0 && data != 'kosong') {
                     for(var i=0; i<data.length; i++) { %>
                     <tr>
-
-
-
-                        <!-- <td>
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-sm btn-default editBtn" style="float: none;"><span class="glyphicon glyphicon-pencil"></span></button>
-                                        <button type="button" class="btn btn-sm btn-default deleteBtn" style="float: none;"><span class="glyphicon glyphicon-trash"></span></button>
-                                    </div>
-                                    <button type="button" class="btn btn-sm btn-success saveBtn" style="float: none; display: none;">Save</button>
-                                    <button type="button" class="btn btn-sm btn-danger confirmBtn" style="float: none; display: none;">Confirm</button>
-                                </td> -->
                         <td class="cheid2">
                             <input class="editInput projectid" type="text" name="id" id="id" value="<%=data[i].projectid%>" style="display: none;">
-                            <a href="#" class="editSpan">
-                                <%=data[i].projectid%>
-                            </a>
+                            <% if(link == '/project' || link == '/project/') { %>
+                                <a href="project/<%=data[i].projectid%>/members" class="editSpan">
+                                    <%=data[i].projectid%>
+                                </a>
+                                <% } %>
+                                    <% if(link != '/project' && link != '/project/') { %>
+                                        <a href="<%=data[i].projectid%>/members" class="editSpan">
+                                            <%=data[i].projectid%>
+                                        </a>
+                                        <% } %>
                         </td>
                         <td class="chename2">
                             <span class="editSpan name">
@@ -233,6 +229,7 @@
                             <button type="button" class="btn btn-sm btn-default editBtn" style="float: none;">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
+
                             <button type="button" class="btn btn-sm btn-default deleteBtn" style="float: none;">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
@@ -287,6 +284,8 @@
                                                 <li>
                                                     <a href="/project/?page=<%= j %>&<%= adaurl %>">
                                                         <%= j %>
+                                                            test
+                                                            <%= adaurl %>
                                                     </a>
                                                 </li>
                                                 <% } %>

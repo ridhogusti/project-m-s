@@ -1,6 +1,6 @@
 
 
-$('.editBtn').on('click', function () {
+$('.editBtn').on('click', function projectid() {
     //hide edit span
     $(this).closest("tr").find(".editSpan").hide();
 
