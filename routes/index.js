@@ -21,7 +21,7 @@ const pool = new Pool({
 // })
 
 app.get('/', function (req, res, next) {
-  res.render('index');
+  res.render('pertama');
 })
 
 app.get('/project/:id/activity', authenticationMiddleware(), function (req, res, next) {
