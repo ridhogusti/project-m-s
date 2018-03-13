@@ -131,7 +131,7 @@
             <div class="form-group">
                 <label for="concept" class="col-sm-12 control-label">
                     <% if(value[10] == null) { %>
-                        <input type="checkbox" value="true" name="cheid2">
+                        <input type="checkbox" value="true" name="cheid2" checked>
                         <% } %>
                             <% if(value[10] == 'true') { %>
                                 <input type="checkbox" value="true" name="cheid2" checked>
@@ -142,7 +142,7 @@
             <div class="form-group">
                 <label for="concept" class="col-sm-12 control-label">
                     <% if(value[11] == null) { %>
-                        <input type="checkbox" value="true" name="chename2">
+                        <input type="checkbox" value="true" name="chename2" checked>
                         <% } %>
                             <% if(value[11] == 'true') { %>
                                 <input type="checkbox" value="true" name="chename2" checked>
@@ -153,7 +153,7 @@
             <div class="form-group">
                 <label for="concept" class="col-sm-12 control-label">
                     <% if(value[12] == null) { %>
-                        <input type="checkbox" value="true" name="chemember2">
+                        <input type="checkbox" value="true" name="chemember2" checked>
                         <% } %>
                             <% if(value[12] == 'true') { %>
                                 <input type="checkbox" value="true" name="chemember2" checked>
@@ -172,145 +172,150 @@
 
     <div class="container">
         <h1>New Item</h1>
-        <form action="/users/project" method="POST" id="create-aform">
-            <div class="form-group">
-                <label for="new-item">Item Text</label>
-                <input type="text" name="text" class="form-control" placeholder="Walk the dog" id="acreate-input">
-            </div>
-            <button class="btn btn-primary">Create Item</button>
-        </form>
+        <%= datauser[0].role %>
+            <% if(datauser[0].role == 'admin') { %>
+                <form action="/users/project" method="POST" id="create-aform">
+                    <div class="form-group">
+                        <label for="new-item">Item Text</label>
+                        <input type="text" name="text" class="form-control" placeholder="Walk the dog" id="acreate-input">
+                    </div>
+                    <button class="btn btn-primary">Create Item</button>
+                </form>
+                <% } %>
 
-        <!-- <button id="get-button"> Get Products </button> -->
+
+                    <!-- <button id="get-button"> Get Products </button> -->
 
 
 
 
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th width="50px" class="cheid2">No</th>
-                    <th class="chename2">Name</th>
-                    <th class="chemember2">Member</th>
-                    <th width="120px">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if(data.length > 0 && data != 'kosong') {
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th width="50px" class="cheid2">No</th>
+                                <th class="chename2">Name</th>
+                                <th class="chemember2">Member</th>
+                                <th width="120px">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(data.length > 0 && data != 'kosong') {
                     for(var i=0; i<data.length; i++) { %>
-                    <tr>
-                        <td class="cheid2">
-                            <input class="editInput projectid" type="text" name="id" id="id" value="<%=data[i].projectid%>" style="display: none;">
-                            <% if(link == '/project' || link == '/project/') { %>
-                                <a href="project/<%=data[i].projectid%>/members" class="editSpan">
-                                    <%=data[i].projectid%>
-                                </a>
-                                <% } %>
-                                    <% if(link != '/project' && link != '/project/') { %>
-                                        <a href="<%=data[i].projectid%>/members" class="editSpan">
-                                            <%=data[i].projectid%>
-                                        </a>
-                                        <% } %>
-                        </td>
-                        <td class="chename2">
-                            <span class="editSpan name">
-                                <%=data[i].name%>
-                            </span>
-                            <input class="editInput name" type="text" name="name" id="name" value="<%=data[i].name%>" style="display: none;">
-                        </td>
-                        <!-- <td> belum ada </td> -->
-                        <td class="chemember2">
-                            <%=data[i].member%>
-                        </td>
-                        <td class="col-md-2">
-                            <!-- <a class="btn btn-success" href="/users/edit/<%=data[i]._id%>" role="button" id="edit">Edit</a> -->
-                            <!-- <a class="btn btn-success editBtn" href="#" role="button" id="edit">Edit</a> -->
-
-                            <!-- <form method="POST" action="/users/delete/<%=data[i]._id%>"> -->
-                            <button type="button" class="btn btn-sm btn-default editBtn" style="float: none;">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-
-                            <button type="button" class="btn btn-sm btn-default deleteBtn" style="float: none;">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-
-
-                            <button type="submit" class="btn btn-sm btn-success saveBtn" style="float: none; display: none;">Save</button>
-                            <button type="button" class="btn btn-sm btn-danger confirmBtn" style="float: none; display: none;">Confirm</button>
-
-                            <!-- <button type="submit" class="btn btn-danger">Delete</button> -->
-                            <!-- </form> -->
-                        </td>
-                    </tr>
-                    <% page++ %>
-                        <%   } 
-                    } %>
-                            <% if(data == 'kosong') { %>
                                 <tr>
-                                    <td colspan="3">No user</td>
+                                    <td class="cheid2">
+                                        <input class="editInput projectid" type="text" name="id" id="id" value="<%=data[i].projectid%>" style="display: none;">
+                                        <% if(link == '/project' || link == '/project/') { %>
+                                            <a href="project/<%=data[i].projectid%>/members" class="editSpan">
+                                                <%=data[i].projectid%>
+                                            </a>
+                                            <% } %>
+                                                <% if(link != '/project' && link != '/project/') { %>
+                                                    <a href="<%=data[i].projectid%>/members" class="editSpan">
+                                                        <%=data[i].projectid%>
+                                                    </a>
+                                                    <% } %>
+                                    </td>
+                                    <td class="chename2">
+                                        <span class="editSpan name">
+                                            <%=data[i].name%>
+                                        </span>
+                                        <input class="editInput name" type="text" name="name" id="name" value="<%=data[i].name%>" style="display: none;">
+                                    </td>
+                                    <!-- <td> belum ada </td> -->
+                                    <td class="chemember2">
+                                        <%=data[i].member%>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <!-- <a class="btn btn-success" href="/users/edit/<%=data[i]._id%>" role="button" id="edit">Edit</a> -->
+                                        <!-- <a class="btn btn-success editBtn" href="#" role="button" id="edit">Edit</a> -->
+
+                                        <!-- <form method="POST" action="/users/delete/<%=data[i]._id%>"> -->
+                                        <% if(datauser[0].role == 'admin') { %>
+
+                                            <button type="button" class="btn btn-sm btn-default editBtn" style="float: none;">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </button>
+
+                                            <button type="button" class="btn btn-sm btn-default deleteBtn" style="float: none;">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                            <% } %>
+
+
+                                                <button type="submit" class="btn btn-sm btn-success saveBtn" style="float: none; display: none;">Save</button>
+                                                <button type="button" class="btn btn-sm btn-danger confirmBtn" style="float: none; display: none;">Confirm</button>
+
+                                                <!-- <button type="submit" class="btn btn-danger">Delete</button> -->
+                                                <!-- </form> -->
+                                    </td>
                                 </tr>
+                                <% page++ %>
+                                    <%   } 
+                    } %>
+                                        <% if(data == 'kosong') { %>
+                                            <tr>
+                                                <td colspan="3">No user</td>
+                                            </tr>
+                                            <% } %>
+                        </tbody>
+                    </table>
+
+
+                    <% if (pageCount > 1) { %>
+                        <ul class="pagination">
+                            <% if (currentPage >= 1) { %>
+                                <li>
+                                    <a href="/?page=1">&laquo;</a>
+                                </li>
                                 <% } %>
-            </tbody>
-        </table>
-
-
-        <% if (pageCount > 1) { %>
-            <ul class="pagination">
-                <% if (currentPage >= 1) { %>
-                    <li>
-                        <a href="/?page=1">&laquo;</a>
-                    </li>
-                    <% } %>
-                        <% j = 1;
+                                    <% j = 1;
       if (currentPage > 5) {
       <!-- i = +currentPage - 4; -->
       j = +currentPage - 4;
       } %>
-                            <% if (j !== 1) { %>
-                                <li class="disabled">
-                                    <a href="#">...</a>
-                                </li>
-                                <% } %>
-                                    <% for (j; j<=pageCount; j++) {
-         %>
-                                        <% if (currentPage == j) { %>
-                                            <li class="active">
-                                                <span>
-                                                    <%= j %>
-                                                        <span class="sr-only">(current)</span>
-                                                </span>
+                                        <% if (j !== 1) { %>
+                                            <li class="disabled">
+                                                <a href="#">...</a>
                                             </li>
-                                            <% } else { %>
-                                                <li>
-                                                    <a href="/project/?page=<%= j %>&<%= adaurl %>">
-                                                        <%= j %>
-                                                            test
-                                                            <%= adaurl %>
-                                                    </a>
-                                                </li>
-                                                <% } %>
-                                                    <% if (j == (+currentPage + 4)) { %>
-                                                        <li class="disabled">
-                                                            <a href="#">...</a>
+                                            <% } %>
+                                                <% for (j; j<=pageCount; j++) {
+         %>
+                                                    <% if (currentPage == j) { %>
+                                                        <li class="active">
+                                                            <span>
+                                                                <%= j %>
+                                                                    <span class="sr-only">(current)</span>
+                                                            </span>
                                                         </li>
-                                                        <% break; } %>
+                                                        <% } else { %>
+                                                            <li>
+                                                                <a href="/project/?page=<%= j %>&<%= adaurl %>">
+                                                                    <%= j %>
+                                                                </a>
+                                                            </li>
                                                             <% } %>
-                                                                <% if (currentPage <= pageCount) { %>
-                                                                    <li>
-                                                                        <a href="/?page=<%= pageCount %>">&raquo;</a>
+                                                                <% if (j == (+currentPage + 4)) { %>
+                                                                    <li class="disabled">
+                                                                        <a href="#">...</a>
                                                                     </li>
-                                                                    <% } %>
-            </ul>
-            <% } %>
+                                                                    <% break; } %>
+                                                                        <% } %>
+                                                                            <% if (currentPage <= pageCount) { %>
+                                                                                <li>
+                                                                                    <a href="/?page=<%= pageCount %>">&raquo;</a>
+                                                                                </li>
+                                                                                <% } %>
+                        </ul>
+                        <% } %>
 
 
-                <div>
+                            <div>
 
-                    <!-- <a class="btn btn-large btn-primary" href="/tambah" role="button">Add</a> -->
-                </div>
+                                <!-- <a class="btn btn-large btn-primary" href="/tambah" role="button">Add</a> -->
+                            </div>
     </div>
     <script>
-        $("input:checkbox(:checked)").each(function () {
+        $("input:checkbox:not(:checked)").each(function () {
             var column = "table ." + $(this).attr("name");
             $(column).hide();
         });
@@ -319,6 +324,83 @@
             var column = "table ." + $(this).attr("name");
             $(column).toggle();
         });
+
+        $('.editBtn').on('click', function projectid() {
+            //hide edit span
+            $(this).closest("tr").find(".editSpan.name").hide();
+
+            //show edit input
+            $(this).closest("tr").find(".editInput.name").show();
+
+            //hide edit button
+            $(this).closest("tr").find(".editBtn").hide();
+
+            //show edit button
+            $(this).closest("tr").find(".saveBtn").show();
+
+        });
+
+        $('.saveBtn').on('click', function () {
+            var rowEl = $(this).closest('tr');
+            var ambilid = rowEl.find('.projectid').val();
+            var ambiltext = rowEl.find('.editInput.name').val();
+            // var editSpan = rowEl.find('.editSpan').text();
+            // console.log(editSpan);
+            console.log(ambilid);
+            console.log(ambiltext);
+            $.ajax({
+                type: 'POST',
+                url: './../users/project/edit/',
+                dataType: "json",
+                data: { id: ambilid, name: ambiltext },
+                success: function (response) {
+                    if (response.status == 'ok') {
+                        console.log(response.data);
+                        rowEl.find(".editSpan.name").text(response.data[0]);
+
+                        rowEl.find(".editInput.name").text(response.data[0]);
+
+                        rowEl.find(".editInput").hide();
+                        rowEl.find(".saveBtn").hide();
+                        rowEl.find(".editSpan").show();
+                        rowEl.find(".editBtn").show();
+                    } else {
+                        alert(response.msg);
+                    }
+                }
+            });
+        });
+
+        $('.deleteBtn').on('click', function () {
+            //hide delete button
+            $(this).closest("tr").find(".deleteBtn").hide();
+
+            //show confirm button
+            $(this).closest("tr").find(".confirmBtn").show();
+
+        });
+
+        $('.confirmBtn').on('click', function () {
+            var trObj = $(this).closest("tr");
+            var ID = $(this).closest("tr").attr('id');
+            var rowEl = $(this).closest('tr');
+            var ambilid = rowEl.find('.projectid').val();
+            $.ajax({
+                type: 'POST',
+                url: '../users/project/delete/',
+                dataType: "json",
+                data: { id: ambilid },
+                success: function (response) {
+                    if (response.status == 'ok') {
+                        trObj.remove();
+                    } else {
+                        trObj.find(".confirmBtn").hide();
+                        trObj.find(".deleteBtn").show();
+                        alert(response.msg);
+                    }
+                }
+            });
+        });
     </script>
-    <script type="text/javascript" src="./javascripts/script.js"></script>
-    <script type="text/javascript" src="../javascripts/script.js"></script>
+    <!-- <script type="text/javascript" src="./javascripts/script.js"></script>
+    <script type="text/javascript" src="../javascripts/script.js"></script> -->

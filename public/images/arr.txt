@@ -1,0 +1,36 @@
+<?php
+class Bisnis{
+
+}
+Andai ada suate t cara
+Tuk kembali menatap
+Agung suryamu yang indah ini 
+ada apa dengan mu ini 
+indah  stnoeu
+indah  stnoeu 
+cara (aoeu aseouth asenotu aoeu)
+Lemblyung Bali
+theu
+$test->>adaada
+$test->>adaada
+$test->>adaada
+$test->>adaada
+$this->validate($request, [
+'id_kelas' = 'required',
+'id_guru' = 'required',
+'id_siswa' = 'required',
+'staoeu' = 'required',
+'aoeu' = 'required',
+'aoeusnth' = 'required',
+'aoeutnh' = 'min:test',
+'asoentuh' = 'required',
+'anotehu' = 'required',
+'aosetnuh' = 'required',
+'aoenuth' = 'required',
+'aoenthu' = 'required',
+]);
+
+'snthaoeu' = snthaoeu
+'saonetuh' = saonetuh
+ueu
+aoeusnth

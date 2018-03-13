@@ -1,0 +1,56 @@
+<%- include('../../layouts/layout.ejs'); %>
+    <link rel="stylesheet" href="../../stylesheets/style.css">
+    <link rel="stylesheet" href="../../../stylesheets/style.css">
+
+    <div class="container">
+        <ul class="nav nav-pills nav-stacked nav2">
+            <li role="presentation">
+                <a href="#">Overview</a>
+            </li>
+            <li role="presentation" class="active">
+                <a href="#">Activity</a>
+            </li>
+            <li role="presentation">
+                <a href="/project/<%= id %>/members">Members</a>
+            </li>
+            <li role="presentation" >
+                <a href="/project/<%= id %>/issues">Issues</a>
+            </li>
+        </ul>
+        <div class="main content">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Activity</h1>
+                    <hr>
+                    <div class="col-md-12">
+                        <p>Activity</p>
+                        <p>From tanggal <%= lalu %> to <%= sekarang %></p>
+                            <% for(let i=0; i<data2.length; i++) { %>
+                                <% let ambilDate = new Date(data2[i].time) %>
+                                <% var weekday = new Array(7);
+                                weekday[0] =  "Sunday";
+                                weekday[1] = "Monday";
+                                weekday[2] = "Tuesday";
+                                weekday[3] = "Wednesday";
+                                weekday[4] = "Thursday";
+                                weekday[5] = "Friday";
+                                weekday[6] = "Saturday"; %>
+                                <%= weekday[ambilDate.getDay()] %>
+                                <% for(let j=0; j<data.length; j++) { %>
+                                    <% let ambilDate2 = new Date(data[j].time) %>
+                                    <% if(ambilDate.getFullYear()+'-'+ambilDate.getMonth()+'-'+ambilDate.getDate() == ambilDate2.getFullYear()+'-'+ambilDate2.getMonth()+'-'+ambilDate2.getDate()) { %>
+                                        <ul>
+                                            <li><%= ambilDate2.getHours() %>:<%= ambilDate2.getMinutes() %> <%= data[j].title %> #<%= data[j].activityid %>:
+                                                 <%= data[j].description %>, modify: <%= data[j].firstname %> <%= data[j].lastname %></li>
+                                        </ul>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        <hr>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>

@@ -1,5 +1,6 @@
 <%- include('../../layouts/layout.ejs'); %>
     <link rel="stylesheet" href="../../stylesheets/style.css">
+    <link rel="stylesheet" href="../../../stylesheets/style.css">
 
     <div class="container">
         <ul class="nav nav-pills nav-stacked nav2">
@@ -7,13 +8,13 @@
                 <a href="#">Overview</a>
             </li>
             <li role="presentation">
-                <a href="#">Activity</a>
+                <a href="/project/<%= id %>/activity">Activity</a>
             </li>
             <li role="presentation" class="active">
                 <a href="#">Members</a>
             </li>
             <li role="presentation">
-                <a href="#">Issues</a>
+                <a href="/project/<%= id %>/issues">Issues</a>
             </li>
         </ul>
         <div class="main content">
@@ -158,7 +159,7 @@
                         <div class="form-group">
                             <label for="concept" class="col-sm-12 control-label">
                                 <% if(value[10] == null) { %>
-                                    <input type="checkbox" value="true" name="cheid2">
+                                    <input type="checkbox" value="true" name="cheid2" checked>
                                     <% } %>
                                         <% if(value[10] == 'true') { %>
                                             <input type="checkbox" value="true" name="cheid2" checked>
@@ -169,7 +170,7 @@
                         <div class="form-group">
                             <label for="concept" class="col-sm-12 control-label">
                                 <% if(value[11] == null) { %>
-                                    <input type="checkbox" value="true" name="chename2">
+                                    <input type="checkbox" value="true" name="chename2" checked>
                                     <% } %>
                                         <% if(value[11] == 'true') { %>
                                             <input type="checkbox" value="true" name="chename2" checked>
@@ -180,7 +181,7 @@
                         <div class="form-group">
                             <label for="concept" class="col-sm-12 control-label">
                                 <% if(value[12] == null) { %>
-                                    <input type="checkbox" value="true" name="cheposition2">
+                                    <input type="checkbox" value="true" name="cheposition2" checked>
                                     <% } %>
                                         <% if(value[12] == 'true') { %>
                                             <input type="checkbox" value="true" name="cheposition2" checked>
@@ -225,7 +226,7 @@
                                     <tr>
                                         <th width="50px" class="cheid2">No</th>
                                         <th class="chename2">Name</th>
-                                        <th class="cheposition2">Member</th>
+                                        <th class="cheposition2">Position</th>
                                         <th width="120px">Action</th>
                                     </tr>
                                 </thead>
@@ -307,10 +308,9 @@
                                                                 </li>
                                                                 <% } else { %>
                                                                     <li>
-                                                                        <a href="/project/?page=<%= j %>&<%= adaurl %>">
+                                                                        <!-- <a href="/project/?page=<%= j %>&<%= adaurl %>"> -->
+                                                                        <a href="/project/<%= id %>/members/?page=<%= j %>&<%= adaurl %>">
                                                                             <%= j %>
-                                                                                test
-                                                                                <%= adaurl %>
                                                                         </a>
                                                                     </li>
                                                                     <% } %>
@@ -341,7 +341,7 @@
 
 
     <script>
-        $("input:checkbox(:checked)").each(function () {
+        $("input:checkbox:not(:checked)").each(function () {
             var column = "table ." + $(this).attr("name");
             $(column).hide();
         });

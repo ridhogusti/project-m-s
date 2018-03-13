@@ -1,29 +1,31 @@
 <%- include('../../layouts/layout.ejs'); %>
     <link rel="stylesheet" href="../../stylesheets/style.css">
+    <link rel="stylesheet" href="../../../stylesheets/style.css">
+
 
     <div class="container">
         <ul class="nav nav-pills nav-stacked nav2">
-            <li role="presentation" >
+            <li role="presentation">
                 <a href="#">Overview</a>
             </li>
             <li role="presentation">
-                <a href="#">Activity</a>
-            </li>
-            <li role="presentation" class="active">
-                <a href="#">Members</a>
+                <a href="/project/<%= id %>/activity">Activity</a>
             </li>
             <li role="presentation">
+                <a href="/project/<%= id %>/members">Members</a>
+            </li>
+            <li role="presentation" class="active">
                 <a href="#">Issues</a>
             </li>
         </ul>
         <div class="main content">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Members</h1>
+                    <h1>Issues</h1>
                     <hr>
                     <h1>Filters</h1>
 
-                    <form action="/project/<%= id %>/members" method="GET">
+                    <form action="/project/<%= id %>/issues" method="GET">
                         <div class="form-group">
                             <label for="concept" class="col-md-3 control-label">
                                 <% if(value[7] == null) { %>
@@ -41,34 +43,34 @@
                         <div class="form-group">
                             <label for="concept" class="col-md-3 control-label">
                                 <% if(value[8] == null) { %>
-                                    <input type="checkbox" value="true" name="chename">
+                                    <input type="checkbox" value="true" name="chesubject">
                                     <% } %>
                                         <% if(value[8] == 'true') { %>
-                                            <input type="checkbox" value="true" name="chename" checked>
+                                            <input type="checkbox" value="true" name="chesubject" checked>
                                             <% } %>
-                                                Name
+                                                Subject
                             </label>
                             <div class="col-md-8">
-                                <input type="text" value="<%=value[1]%>" class="form-control" id="name" name="name">
+                                <input type="text" value="<%=value[1]%>" class="form-control" id="subject" name="subject">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="concept" class="col-md-3 control-label">
                                 <% if(value[9] == null) { %>
-                                    <input type="checkbox" value="true" name="cheposition">
+                                    <input type="checkbox" value="true" name="chetracker">
                                     <% } %>
                                         <% if(value[9] == 'true') { %>
-                                            <input type="checkbox" value="true" name="cheposition" checked>
+                                            <input type="checkbox" value="true" name="chetracker" checked>
                                             <% } %>
-                                                Position
+                                                Tracker
                             </label>
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <select class="form-control" id="position" name="position">
+                                    <select class="form-control" id="tracker" name="tracker">
                                         <option value="">Pilih Posisi</option>
-                                        <option value="Manager">Manager</option>
-                                        <option value="Programmer">Software Developer</option>
-                                        <option value="Quality Assurance">Quality Assurance</option>
+                                        <option value="Bug">Bug</option>
+                                        <option value="Feature">Feature</option>
+                                        <option value="Support">Support</option>
                                     </select>
                                 </div>
                             </div>
@@ -158,7 +160,7 @@
                         <div class="form-group">
                             <label for="concept" class="col-sm-12 control-label">
                                 <% if(value[10] == null) { %>
-                                    <input type="checkbox" value="true" name="cheid2">
+                                    <input type="checkbox" value="true" name="cheid2" checked>
                                     <% } %>
                                         <% if(value[10] == 'true') { %>
                                             <input type="checkbox" value="true" name="cheid2" checked>
@@ -169,23 +171,23 @@
                         <div class="form-group">
                             <label for="concept" class="col-sm-12 control-label">
                                 <% if(value[11] == null) { %>
-                                    <input type="checkbox" value="true" name="chename2">
+                                    <input type="checkbox" value="true" name="chesubject2" checked>
                                     <% } %>
                                         <% if(value[11] == 'true') { %>
-                                            <input type="checkbox" value="true" name="chename2" checked>
+                                            <input type="checkbox" value="true" name="chesubject2" checked>
                                             <% } %>
-                                                Name
+                                                Subject
                             </label>
                         </div>
                         <div class="form-group">
                             <label for="concept" class="col-sm-12 control-label">
                                 <% if(value[12] == null) { %>
-                                    <input type="checkbox" value="true" name="cheposition2">
+                                    <input type="checkbox" value="true" name="chetracker2" checked>
                                     <% } %>
                                         <% if(value[12] == 'true') { %>
-                                            <input type="checkbox" value="true" name="cheposition2" checked>
+                                            <input type="checkbox" value="true" name="chetracker2" checked>
                                             <% } %>
-                                                Position
+                                                Tracker
                             </label>
                         </div>
                     </form>
@@ -198,34 +200,13 @@
                     <div class="">
                         <h1>New Item</h1>
                         <%= adaurl.match(/\d+/g) %>
-                            <form action="/users/project/members/add/<%= id %>" method="POST" id="create-aform">
-                                <div class="form-group">
-                                    <label for="new-item">Item Text</label>
-                                    <select class="form-control" id="member" name="userid">
-                                        <option value="">Choose the boolean...</option>
-                                        <% for( let j = 0; j < data3.length; j++) { %>
-                                            <option value="<%=data3[j].userid%>">
-                                                <%=data3[j].firstname%>
-                                                    <%=data3[j].lastname%> di posisi
-                                                        <%=data3[j].position%>
-                                            </option>
-                                            <% } %>
-                                    </select>
-                                </div>
-                                <button class="btn btn-primary">Create Item</button>
-                            </form>
-
-                            <!-- <button id="get-button"> Get Products </button> -->
-
-
-
 
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th width="50px" class="cheid2">No</th>
-                                        <th class="chename2">Name</th>
-                                        <th class="cheposition2">Member</th>
+                                        <th class="chesubject2">Subject</th>
+                                        <th class="chetracker2">Tracker</th>
                                         <th width="120px">Action</th>
                                     </tr>
                                 </thead>
@@ -234,37 +215,40 @@
                                             for(var i=0; i<data.length; i++) { %>
                                         <tr>
                                             <td class="cheid2">
-                                                <input class="editInput memberid" type="text" name="id" id="id" value="<%=data[i].id%>" style="display: none;">
                                                 <a href="project/<%=data[i].projectid%>/members" class="editSpan memberid">
-                                                    <%=data[i].id%>
+                                                    <%=data[i].issueid%>
                                                 </a>
                                             </td>
-                                            <td class="chename2">
-                                                <span class="editSpan name">
-                                                    <%=data[i].firstname%>
-                                                        <%=data[i].lastname%>
+                                            <td class="chesubject2">
+                                                <span class="editSpan subject">
+                                                    <%=data[i].subject%>
                                                 </span>
                                             </td>
                                             <!-- <td> belum ada </td> -->
-                                            <td class="cheposition2">
-                                                <%=data[i].position%>
+                                            <td class="chetracker2">
+                                                <%=data[i].tracker%>
                                             </td>
                                             <td class="col-md-2">
                                                 <!-- <a class="btn btn-success" href="/users/edit/<%=data[i]._id%>" role="button" id="edit">Edit</a> -->
                                                 <!-- <a class="btn btn-success editBtn" href="#" role="button" id="edit">Edit</a> -->
 
-                                                <!-- <form method="POST" action="/users/project/members/delete/<%=data[i].id%>"> -->
+                                                <form method="POST" action="/users/project/issues/delete/<%=data[i].issueid%>/<%= id %>">
 
 
-                                                <button type="submit" class="btn btn-sm btn-default deleteBtn" style="float: none;">
+                                                <button type="button" data-id="<%=data[i].issueid%>" class="btn btn-sm btn-default editButton" style="float: none;">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </button>
+                                                <button type="submit" class="btn btn-sm btn-default deleteBtn" style="float: none;" onclick="return confirm('Are you sure you want to delete this item?');">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
 
 
                                                 <button type="button" class="btn btn-sm btn-danger confirmBtn" style="float: none; display: none;">Confirm</button>
 
-                                                <!-- <button type="submit" class="btn btn-danger">Delete</button> -->
-                                                <!-- </form> -->
+                                                <!-- <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button> -->
+
+
+                                                </form>
                                             </td>
                                         </tr>
                                         <% page++ %>
@@ -307,10 +291,8 @@
                                                                 </li>
                                                                 <% } else { %>
                                                                     <li>
-                                                                        <a href="/project/?page=<%= j %>&<%= adaurl %>">
+                                                                        <a href="/project/<%= id %>/issues/?page=<%= j %>&<%= adaurl %>">
                                                                             <%= j %>
-                                                                                test
-                                                                                <%= adaurl %>
                                                                         </a>
                                                                     </li>
                                                                     <% } %>
@@ -331,7 +313,403 @@
 
                                     <div>
 
-                                        <!-- <a class="btn btn-large btn-primary" href="/tambah" role="button">Add</a> -->
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                            Add
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel">Add Issues</h4>
+                                                    </div>
+                                                    <form action="/users/project/issues/add/<%= id %>" method="POST" id="create-aform" enctype="multipart/form-data">
+                                                        <div class="modal-body">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body form-horizontal payment-form">
+                                                                    <div class="form-group">
+                                                                        <label for="tracker" class="col-sm-3 control-label">Tracker</label>
+                                                                        <div class="col-sm-9">
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="tracker" id="optionsRadios1" value="Bug" checked> Bug
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="tracker" id="optionsRadios2" value="Feature"> Feature
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="tracker" id="optionsRadios3" value="Support"> Support
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="subject" class="col-sm-3 control-label">Subject</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="description" class="col-sm-3 control-label">Description</label>
+                                                                        <div class="col-sm-9">
+                                                                            <textarea class="form-control" rows="3" name="description" placeholder="Description"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="status" class="col-sm-3 control-label">Status</label>
+                                                                        <div class="col-sm-9">
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios1" value="New" checked> New
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios2" value="In Progress"> In Progress
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios3" value="Resolved"> Resolved
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios4" value="Feedback"> Feedback
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios5" value="Closed"> Closed
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios6" value="Rejected"> Rejected
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="priority" class="col-sm-3 control-label">Priority</label>
+                                                                        <div class="col-sm-9">
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="priority" id="optionsRadios1" value="Normal" checked> Normal
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="priority" id="optionsRadios2" value="High"> High
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="priority" id="optionsRadios3" value="Urgent"> Urgent
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="priority" id="optionsRadios3" value="Immediate"> Immediate
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="assignee" class="col-sm-3 control-label">Assignee</label>
+                                                                        <div class="col-sm-9">
+
+                                                                            <select class="form-control" id="assignee" name="assignee">
+                                                                                <option value="">Choose the boolean...</option>
+                                                                                <% for( let j = 0; j < data3.length; j++) { %>
+                                                                                    <option value="<%=data3[j].userid%>">
+                                                                                        <%=data3[j].firstname%>
+                                                                                            <%=data3[j].lastname%>
+                                                                                    </option>
+                                                                                    <% } %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Start date" class="col-sm-3 control-label">Start Date</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="date" name="startdate">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Due date" class="col-sm-3 control-label">Due Date</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="date" name="duedate">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Estimated time" class="col-sm-3 control-label">Estimated Time</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="date" name="estimatedtime">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="done" class="col-sm-3 control-label">% done</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="number" class="form-control" id="done" name="done">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="file" class="col-sm-3 control-label">File Upload</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="file" class="form-control" id="file" name="file">
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <h4 class="modal-title" id="titleFormEdit" style="display: none;">Update Issues</h4>
+                                        <div class="modal fade bs-example-modal-lg" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel">Add Issues</h4>
+                                                    </div>
+                                                    <form action="" method="POST" id="userForm" enctype="multipart/form-data">
+                                                        <!-- issues/add/<%= id %> -->
+                                                        <div class="modal-body">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body form-horizontal payment-form">
+                                                                    <div class="form-group">
+                                                                        <label for="issueid" class="col-sm-3 control-label">Issues ID</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" class="form-control" id="issueid" disabled name="issueid" placeholder="Issue ID">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="tracker" class="col-sm-3 control-label">Tracker</label>
+                                                                        <div class="col-sm-9">
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="tracker" id="optionsRadios1" value="Bug"> Bug
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="tracker" id="optionsRadios2" value="Feature"> Feature
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="tracker" id="optionsRadios3" value="Support"> Support
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="subject" class="col-sm-3 control-label">Subject</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="description" class="col-sm-3 control-label">Description</label>
+                                                                        <div class="col-sm-9">
+                                                                            <textarea class="form-control" rows="3" name="description" placeholder="Description"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="status" class="col-sm-3 control-label">Status</label>
+                                                                        <div class="col-sm-9">
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios1" value="New" checked> New
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios2" value="In Progress"> In Progress
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios3" value="Resolved"> Resolved
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios4" value="Feedback"> Feedback
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios5" value="Closed"> Closed
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="status" id="optionsRadios6" value="Rejected"> Rejected
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="priority" class="col-sm-3 control-label">Priority</label>
+                                                                        <div class="col-sm-9">
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="priority" id="optionsRadios1" value="Normal" checked> Normal
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="priority" id="optionsRadios2" value="High"> High
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="priority" id="optionsRadios3" value="Urgent"> Urgent
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    <input type="radio" name="priority" id="optionsRadios3" value="Immediate"> Immediate
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="assignee" class="col-sm-3 control-label">Assignee</label>
+                                                                        <div class="col-sm-9">
+
+                                                                            <select class="form-control assignee" id="assignee" name="assignee">
+                                                                                <option value="">Choose the boolean...</option>
+                                                                                <% for( let j = 0; j < data3.length; j++) { %>
+                                                                                    <option value="<%=data3[j].userid%>">
+                                                                                        <%=data3[j].firstname%>
+                                                                                            <%=data3[j].lastname%>
+                                                                                                <%=data3[j].userid%>
+                                                                                    </option>
+                                                                                    <% } %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Start date" class="col-sm-3 control-label">Start Date</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="date" name="startdate">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Due date" class="col-sm-3 control-label">Due Date</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="date" name="duedate">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Estimated time" class="col-sm-3 control-label">Estimated Time</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="date" name="estimatedtime">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="done" class="col-sm-3 control-label">% done</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="number" class="form-control" id="done" name="done">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="file" class="col-sm-3 control-label">File Upload</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="file" class="form-control" id="file" name="file">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="Spent Time" class="col-sm-3 control-label">Spent Time</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="date" name="spenttime">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="author" class="col-sm-3 control-label">Author</label>
+                                                                        <div class="col-sm-9">
+
+                                                                            <select class="form-control" id="author" name="author">
+                                                                                <option value="">Choose the boolean...</option>
+                                                                                <% for( let j = 0; j < data3.length; j++) { %>
+                                                                                    <option value="<%=data3[j].userid%>">
+                                                                                        <%=data3[j].firstname%>
+                                                                                            <%=data3[j].lastname%>
+                                                                                    </option>
+                                                                                    <% } %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Created Date" class="col-sm-3 control-label">Created Date</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="createddate" name="createddate">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Update Date" class="col-sm-3 control-label">Update Date</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="updateddate" name="updateddate">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Close Date" class="col-sm-3 control-label">Close Date</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" class="form-control" id="closeddate" name="closeddate">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="parenttask" class="col-sm-3 control-label">Parent Taks</label>
+                                                                        <div class="col-sm-9">
+
+                                                                            <select class="form-control" id="parenttask" name="parenttask" required>
+                                                                                <option value="">Choose the boolean...</option>
+                                                                                <% for( let j = 0; j < parentid.length; j++) { %>
+                                                                                    <option value="<%=parentid[j].issueid%>">
+                                                                                        <%=parentid[j].issueid%>
+                                                                                    </option>
+                                                                                    <% } %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                     </div>
                 </div>
@@ -339,9 +717,111 @@
         </div>
     </div>
 
+    <script src="//oss.maxcdn.com/bootbox/4.2.0/bootbox.min.js"></script>
 
     <script>
-        $("input:checkbox(:checked)").each(function () {
+        // $('#myModal').modal('toggle');
+        // $(document).ready(function () {
+        // $('#userForm')
+        //     .on('success.form.fv', function (e) {
+        //         // Save the form data via an Ajax request
+        //         e.preventDefault();
+
+        //         var $form = $(e.target),
+        //             id = $form.find('[name="issueid"]').val();
+        //             console.log($form.serialize());
+
+        //         // The url and method might be different in your application
+        //         $.ajax({
+        //             url: 'users/project/issue/edit/' + id,
+        //             method: 'POST',
+        //             data: $form.serialize()
+        //         }).success(function (response) {
+        //             // Get the cells
+        //             var $button = $('button[data-id="' + response.id + '"]'),
+        //                 $tr = $button.closest('tr'),
+        //                 $cells = $tr.find('td');
+
+        //             // Update the cell data
+        //             $cells
+        //                 .eq(1).html(response.name).end()
+        //                 .eq(2).html(response.email).end()
+        //                 .eq(3).html(response.website).end();
+
+        //             // Hide the dialog
+        //             $form.parents('.bootbox').modal('hide');
+
+        //             // You can inform the user that the data is updated successfully
+        //             // by highlighting the row or showing a message box
+        //             bootbox.alert('The user profile is updated');
+        //         });
+        //     });
+
+        $('.editButton').on('click', function () {
+            // Get the record's ID via attribute
+            var id = $(this).attr('data-id');
+            console.log(id);
+
+            $.ajax({
+                url: '/project/issues/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response.data[0]);
+                    // Populate the form fields with the data returned from server
+                    $('#userForm')
+                        .find('[name="issueid"]').val(response.data[0].issueid).end()
+                        .find('[name="subject"]').val(response.data[0].subject).end()
+                        .find('[name="description"]').val(response.data[0].description).end()
+                        .find('[name="startdate"]').val(response.data[0].startdate).end()
+                        .find('[name="duedate"]').val(response.data[0].duedate).end()
+                        .find('[name="estimatedtime"]').val(response.data[0].estimatedtime).end()
+                        .find('[name="done"]').val(response.data[0].done).end();
+
+                    console.log(id);
+
+                    $(':radio[value=' + response.data[0].tracker + ']').prop('checked', true);
+                    $(':radio[value=' + response.data[0].status + ']').prop('checked', true);
+                    $(':radio[value=' + response.data[0].priority + ']').prop('checked', true);
+                    $('option[value=' + response.data[0].assignee + ']').prop('selected', true);
+                    $('option[value=' + id + ']').prop('disabled', true).end();
+
+                    $('#userForm').attr('action', `/users/project/issue/edit/${response.data[0].projectid}/${response.data[0].issueid}`);
+                    // $('#userForm').attr('action', `/users/project/issues/add/6`);
+
+
+                    $('#myModal2').modal('toggle');
+
+
+                    // $('#titleFormEdit').show();
+                    // $('#userForm').show();
+                    // Show the dialog
+                    // bootbox
+                    //     .dialog({
+                    //         title: 'Edit the user profile',
+                    //         message: $('#userForm'),
+                    //         show: false // We will show it manually later
+                    //     })
+                    //     .on('shown.bs.modal', function (e) {
+                    //         e.preventDefault();
+                    //         $('#userForm')
+                    //             .show()                             // Show the login form
+                    //         // .formValidation('resetForm'); // Reset form
+                    //     })
+                    //     .on('hide.bs.modal', function (e) {
+                    //         // Bootbox will remove the modal (including the body which contains the login form)
+                    //         // after hiding the modal
+                    //         // Therefor, we need to backup the form
+                    //         $('#userForm').hide().appendTo('body');
+                    //     })
+                    //     .modal('show');
+
+                }
+            });
+        });
+        // });
+
+        $("input:checkbox:not(:checked)").each(function () {
             var column = "table ." + $(this).attr("name");
             $(column).hide();
         });
@@ -351,14 +831,14 @@
             $(column).toggle();
         });
 
-        $('.deleteBtn').on('click', function () {
-            //hide delete button
-            $(this).closest("tr").find(".deleteBtn").hide();
+        // $('.deleteBtn').on('click', function () {
+        //     //hide delete button
+        //     $(this).closest("tr").find(".deleteBtn").hide();
 
-            //show confirm button
-            $(this).closest("tr").find(".confirmBtn").show();
+        //     //show confirm button
+        //     $(this).closest("tr").find(".confirmBtn").show();
 
-        });
+        // });
 
         $('.confirmBtn').on('click', function () {
             var trObj = $(this).closest("tr");

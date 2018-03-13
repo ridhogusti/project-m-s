@@ -11,6 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var pgSession = require('connect-pg-simple')(session);
 var { Pool } = require('pg');
 var bcrypt = require('bcryptjs');
+var upload = require("express-fileupload");
 
 const pool = new Pool({
   user: 'postgres',
@@ -34,6 +35,9 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//file upload
+app.use(upload());
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -72,7 +76,7 @@ passport.use(new LocalStrategy(
 
         bcrypt.compare(password, hash, function(err, response) {
           if (response === true) {
-            return done(null, { user_id: result.rows[0].userid });
+            return done(null, { user_id: result.rows[0].userid, role: result.rows[0].role });
           } else {
             return done(null, false);
           }

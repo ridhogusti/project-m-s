@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var moment = require('moment');
 
 var bcrypt = require('bcryptjs');
 const saltRounds = 10;
@@ -357,6 +358,180 @@ router.post('/project', function (req, res) {
   })
 });
 
+router.post('/project/issues/add/:id', function (req, res) {
+  var id = req.params.id;
+  var tracker = req.body.tracker;
+  var subject = req.body.subject;
+  var description = req.body.description;
+  var status = req.body.status;
+  var priority = req.body.priority;
+  var assignee = 0;
+  assignee = req.body.assignee;
+  var startdate = req.body.startdate;
+  var duedate = req.body.duedate;
+  var estimatedtime = req.body.estimatedtime;
+  var done = req.body.done;
+
+
+  let files = '';
+
+  if (req.files.length != null) {
+
+    files = req.files.file;
+
+    files.mv(__dirname + '/../public/images/' + files.name, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('berhasil');
+      }
+    })
+
+    console.log(files);
+  }
+
+  var values = [id, tracker, subject, description, status, priority, assignee, startdate, duedate, estimatedtime, done, files.name];
+
+  const query = `INSERT INTO issues(projectid, tracker, subject, description, status, priority, assignee, startdate, duedate, estimatedtime, done, files) 
+  VALUES( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
+
+  console.log(values);
+
+  var time = moment().format('YYYY-MM-DD hh:mm:ss');
+  var author = `${JSON.stringify(req.session.passport.user.user_id)}`;
+  var values2 = [
+    time,
+    subject,
+    description,
+    author
+  ]
+  const query2 = `INSERT INTO activity(time, title, description, author) VALUES($1, $2, $3, $4)`;
+
+  pool.query(query, values, function (err, result) {
+    if (err) {
+      console.error(err.message);
+    } else {
+      pool.query(query2, values2, function (err, result2) {
+        if (err) {
+          console.error(err.message);
+        } else {
+          res.redirect(`/project/${id}/issues`);
+        }
+      })
+    }
+  })
+})
+
+router.post('/project/issue/edit/:id/:id2', function (req, res) {
+  var id = req.params.id;
+  var tracker = req.body.tracker;
+  var subject = req.body.subject;
+  var description = req.body.description;
+  var status = req.body.status;
+  var priority = req.body.priority;
+  var assignee = req.body.assignee;
+  var startdate = req.body.startdate;
+  var duedate = req.body.duedate;
+  var estimatedtime = req.body.estimatedtime;
+  var done = req.body.done;
+  var spenttime = req.body.spenttime;
+  var targetversion = req.body.targetversion;
+  var author = req.body.author;
+  var createdate = req.body.createdate;
+  var updatedate = req.body.updatedate;
+  var closedate = req.body.closedate;
+  var parenttask = req.body.parenttask;
+  var issueid = req.params.id2;
+
+  // if (req.files) {
+  //   var file = req.files.filename,
+  //     filename = file.name;
+  // }
+
+  console.log('req.files');
+  console.log(req.files);
+  console.log(req.files.length);
+
+  let files = '';
+
+  if (req.files.length != null) {
+
+    files = req.files.file;
+
+    files.mv(__dirname + '/../public/images/' + files.name, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('berhasil');
+      }
+    })
+
+    console.log(files);
+  }
+
+
+  if (parenttask == '') {
+    parenttask = 0;
+  }
+
+  var values = [id, tracker, subject, description,
+    status, priority, assignee, startdate, duedate,
+    estimatedtime, done, spenttime, targetversion, author,
+    createdate, updatedate, closedate, parenttask, issueid, files.name];
+
+  const query = `UPDATE issues SET 
+    projectid= $1,
+   tracker= $2,
+   subject = $3,
+   description = $4,
+   status = $5,
+   priority = $6,
+   assignee = $7,
+   startdate = $8,
+   duedate = $9,
+   estimatedtime = $10,
+   done = $11,
+   spenttime = $12,
+   targetversion = $13,
+   author = $14,
+   createddate = $15,
+   updateddate = $16,
+   closeddate = $17,
+   parenttask = $18,
+   files = $20
+
+  WHERE issueid = $19
+  `;
+
+  console.log(values);
+
+
+  var time = moment().format('YYYY-MM-DD hh:mm:ss');
+  var author = `${JSON.stringify(req.session.passport.user.user_id)}`;
+  console.log(author);
+  var values2 = [
+    time,
+    subject,
+    description,
+    author
+  ];
+  const query2 = `INSERT INTO activity(time, title, description, author) VALUES($1, $2, $3, $4)`;
+
+  // pool.query(query, values, function (err, result) {
+  //   if (err) {
+  //     console.error(err.message);
+  //   } else {
+  //     pool.query(query2, values2, function (err, result2) {
+  //       if (err) {
+  //         console.error(err.message);
+  //       } else {
+  //         res.redirect(`/project/${id}/issues`);
+  //       }
+  //     })
+  //   }
+  // })
+
+})
 
 router.post('/project/edit/', function (req, res) {
   var id = req.body.id;
@@ -384,6 +559,28 @@ router.post('/project/edit/', function (req, res) {
 })
 
 
+
+router.post('/project/issues/delete/:id/:id2', function (req, res) {
+  var id = req.params.id;
+  var id2 = req.params.id2;
+  var values = [
+    id
+  ];
+  console.log(values);
+  const query = `DELETE FROM issues WHERE issueid = $1`;
+  pool.query(query, values, function (err, result) {
+    if (err) {
+      console.error(err.message);
+    } else {
+
+      res.redirect(`/project/${id2}/issues`);
+      // res.json({
+      //   status: 'ok',
+      //   data: values
+      // })
+    }
+  })
+})
 router.post('/project/members/delete/', function (req, res) {
   var id = req.body.id;
   var values = [
@@ -412,7 +609,7 @@ router.post('/project/members/add/:id', function (req, res) {
   ];
   const query = `INSERT INTO members(userid, projectid) VALUES($1, $2)`;
 
-  pool.query(query, values, function(err, result) {
+  pool.query(query, values, function (err, result) {
     if (err) {
       console.error(err.message);
     } else {
