@@ -4,13 +4,13 @@ var moment = require('moment');
 
 const { Pool, Client } = require('pg');
 
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'pms',
-  password: 'thetravis12',
-  port: 5433
-})
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'pms',
+//   password: 'thetravis12',
+//   port: 5433
+// })
 
 app.get('/', function (req, res, next) {
   res.render('index');
