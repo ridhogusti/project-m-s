@@ -4,7 +4,6 @@ var moment = require('moment');
 
 const { Pool, Client } = require('pg');
 
-
 const pool = new Pool({
   user: 'wmagkcnpiirpil',
   host: 'ec2-23-23-222-184.compute-1.amazonaws.com',
@@ -37,11 +36,14 @@ app.get('/project/:id/activity', authenticationMiddleware(), function (req, res,
   ]
   var tanggalSekarang = dateSekarang.getFullYear() + '-' + bulan[dateSekarang.getMonth()] + '-' + tanggal[dateSekarang.getDate()];
   var sekarang = moment().format("YYYY-MM-DD hh:mm:ss");
-  var sekarang = moment().format("YYYY/MM/DD");
+  // var sekarang = moment().format("YYYY/MM/DD");
   var lalu = moment().subtract(7, 'days').format("YYYY-MM-DD hh:mm:ss");
-  var lalu = moment().subtract(7, 'days').format("YYYY/MM/DD");
-  var dateMinta = "2018-03-01";
-  var dateMinta2 = "2018-03-03 14:14:06";
+  // var lalu = moment().subtract(7, 'days').format("YYYY/MM/DD");
+  console.log(lalu, 'test');
+  // var dateMinta = "2018-03-01";
+  // var dateMinta2 = "2018-03-03 14:14:06";
+  var dateMinta = lalu;
+  var dateMinta2 = sekarang;
   var values = [
     dateMinta,
     dateMinta2

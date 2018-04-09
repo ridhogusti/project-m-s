@@ -98,7 +98,7 @@ router.post('/register', function (req, res) {
             // 	if (err) throw err;
             // 	console.log(results);
             const user_id = result.rows[0].userid;
-
+            
             req.login(user_id, function (err) {
               req.flash('success_msg', 'You are registered and can now login');
               res.redirect('/users/login');
@@ -525,19 +525,19 @@ router.post('/project/issue/edit/:id/:id2', function (req, res) {
   ];
   const query2 = `INSERT INTO activity(time, title, description, author) VALUES($1, $2, $3, $4)`;
 
-  // pool.query(query, values, function (err, result) {
-  //   if (err) {
-  //     console.error(err.message);
-  //   } else {
-  //     pool.query(query2, values2, function (err, result2) {
-  //       if (err) {
-  //         console.error(err.message);
-  //       } else {
-  //         res.redirect(`/project/${id}/issues`);
-  //       }
-  //     })
-  //   }
-  // })
+  pool.query(query, values, function (err, result) {
+    if (err) {
+      console.error(err.message);
+    } else {
+      pool.query(query2, values2, function (err, result2) {
+        if (err) {
+          console.error(err.message);
+        } else {
+          res.redirect(`/project/${id}/issues`);
+        }
+      })
+    }
+  })
 
 })
 

@@ -13,6 +13,15 @@ var { Pool } = require('pg');
 var bcrypt = require('bcryptjs');
 var upload = require("express-fileupload");
 
+
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'pms',
+//   password: 'thetravis12',
+//   port: 5433
+// })
+
 const pool = new Pool({
   user: 'wmagkcnpiirpil',
   host: 'ec2-23-23-222-184.compute-1.amazonaws.com',
