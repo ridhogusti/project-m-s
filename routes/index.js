@@ -581,7 +581,8 @@ app.get('/project/:id/issues', authenticationMiddleware(), function (req, res) {
         req.query.chetracker,
         req.query.chefloat,
         req.query.chedate,
-        req.query.cheboolean
+        req.query.cheboolean,
+        req.query.chestatus,
       ];
 
 
@@ -638,6 +639,17 @@ app.get('/project/:id/issues', authenticationMiddleware(), function (req, res) {
       if (req.query.chetracker === 'true') {
         for (let i = 0; i < data2.length; i++) {
           if (data2[i].tracker != req.query.tracker) {
+            console.log(req.query.tracker, 'tracker');
+            data2.splice(i, 1);
+            i--;
+          }
+        }
+      }
+
+      if (req.query.chestatus === 'true') {
+        for (let i = 0; i < data2.length; i++) {
+          if (data2[i].status != req.query.status) {
+            console.log(req.query.status, 'status');
             data2.splice(i, 1);
             i--;
           }

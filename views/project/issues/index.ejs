@@ -76,6 +76,30 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="concept" class="col-md-3 control-label">
+                                <% if(value[13] == null) { %>
+                                    <input type="checkbox" value="true" name="chestatus">
+                                    <% } %>
+                                        <% if(value[13] == 'true') { %>
+                                            <input type="checkbox" value="true" name="chestatus" checked>
+                                            <% } %>
+                                                Status
+                            </label>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="">Pilih Status</option>
+                                        <option value="New">New</option>
+                                        <option value="InProgress">In Progress</option>
+                                        <option value="Resolved">Resolved</option>
+                                        <option value="Feedback">Feedback</option>
+                                        <option value="Closed">Closed</option>
+                                        <option value="Rejected">Rejected</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-12 text-left">
                                 <button type="submit" class="btn btn-primary">Filter</button>
                             </div>
