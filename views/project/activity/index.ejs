@@ -41,6 +41,7 @@
                                     <% if(ambilDate.getFullYear()+'-'+ambilDate.getMonth()+'-'+ambilDate.getDate() == ambilDate2.getFullYear()+'-'+ambilDate2.getMonth()+'-'+ambilDate2.getDate()) { %>
                                         <ul>
                                             <li><%= ambilDate2.getHours() %>:<%= ambilDate2.getMinutes() %> <%= data[j].title %> #<%= data[j].activityid %>:
+                                                ( <%= data[j].status %> )
                                                  <%= data[j].description %>, modify: <%= data[j].firstname %> <%= data[j].lastname %></li>
                                         </ul>
                                     <% } %>

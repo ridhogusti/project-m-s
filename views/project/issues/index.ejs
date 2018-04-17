@@ -374,7 +374,7 @@
                                                                             </div>
                                                                             <div class="radio">
                                                                                 <label>
-                                                                                    <input type="radio" name="status" id="optionsRadios2" value="In Progress"> In Progress
+                                                                                    <input type="radio" name="status" id="optionsRadios2" value="InProgress"> In Progress
                                                                                 </label>
                                                                             </div>
                                                                             <div class="radio">
@@ -454,7 +454,7 @@
                                                                     <div class="form-group">
                                                                         <label for="Estimated time" class="col-sm-3 control-label">Estimated Time</label>
                                                                         <div class="col-sm-9">
-                                                                            <input type="date" class="form-control" id="date" name="estimatedtime">
+                                                                            <input type="text" class="form-control" id="date" name="estimatedtime">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -548,7 +548,7 @@
                                                                             </div>
                                                                             <div class="radio">
                                                                                 <label>
-                                                                                    <input type="radio" name="status" id="optionsRadios2" value="In Progress"> In Progress
+                                                                                    <input type="radio" name="status" id="optionsRadios2" value="InProgress"> In Progress
                                                                                 </label>
                                                                             </div>
                                                                             <div class="radio">
@@ -629,7 +629,7 @@
                                                                     <div class="form-group">
                                                                         <label for="Estimated time" class="col-sm-3 control-label">Estimated Time</label>
                                                                         <div class="col-sm-9">
-                                                                            <input type="date" class="form-control" id="date" name="estimatedtime">
+                                                                            <input type="text" class="form-control" id="date" name="estimatedtime">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -648,7 +648,7 @@
                                                                     <div class="form-group">
                                                                         <label for="Spent Time" class="col-sm-3 control-label">Spent Time</label>
                                                                         <div class="col-sm-9">
-                                                                            <input type="date" class="form-control" id="date" name="spenttime">
+                                                                            <input type="text" class="form-control" id="date" name="spenttime">
                                                                         </div>
                                                                     </div>
 
@@ -778,7 +778,7 @@
                         .find('[name="estimatedtime"]').val(response.data[0].estimatedtime).end()
                         .find('[name="done"]').val(response.data[0].done).end();
 
-                    console.log(id);
+                    console.log(response.data[0].status, 'test');
 
                     $(':radio[value=' + response.data[0].tracker + ']').prop('checked', true);
                     $(':radio[value=' + response.data[0].status + ']').prop('checked', true);

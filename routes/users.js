@@ -411,9 +411,10 @@ router.post('/project/issues/add/:id', function (req, res) {
     time,
     subject,
     description,
-    author
+    author,
+    status
   ]
-  const query2 = `INSERT INTO activity(time, title, description, author) VALUES($1, $2, $3, $4)`;
+  const query2 = `INSERT INTO activity(time, title, description, author, status) VALUES($1, $2, $3, $4, $5)`;
 
   pool.query(query, values, function (err, result) {
     if (err) {
@@ -521,9 +522,10 @@ router.post('/project/issue/edit/:id/:id2', function (req, res) {
     time,
     subject,
     description,
-    author
+    author,
+    status
   ];
-  const query2 = `INSERT INTO activity(time, title, description, author) VALUES($1, $2, $3, $4)`;
+  const query2 = `INSERT INTO activity(time, title, description, author, status) VALUES($1, $2, $3, $4, $5)`;
 
   pool.query(query, values, function (err, result) {
     if (err) {
