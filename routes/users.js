@@ -382,8 +382,9 @@ router.post('/project/issues/add/:id', function (req, res) {
 
 
   let files = '';
+  console.log(req.files.file.name, 'test');
 
-  if (req.files.length != null) {
+  if (req.files.file.name != null) {
 
     files = req.files.file;
 
